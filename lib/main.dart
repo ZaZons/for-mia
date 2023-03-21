@@ -1,5 +1,3 @@
-import 'dart:io';
-import 'package:path_provider/path_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -110,7 +108,7 @@ class PickupLinesPage extends StatelessWidget {
       'Well, here I am. What are your other two wishes?',
       'Feel my shirt. Know what it\'s made of? Boyfriend material',
       'Did you just come out of the oven? Because you\'re hot',
-      'Know what\'s on the menu? Me \'n\' u',
+      'What\'s in the menu??? Me \'n\' u',
       'It\'s a good thing I have my library card, because I am totally checking you out'
     };
 
@@ -119,21 +117,22 @@ class PickupLinesPage extends StatelessWidget {
       body: Center(
         child: Column(
           children: [
+            const Spacer(),
             for (var p in pickupLines) ...[
-              Flexible(
+              Expanded(
                 child: Text(
                   textAlign: TextAlign.center,
                   p,
                 ),
               ),
+              const Spacer(),
               if (p != pickupLines.last) ...[
-                const Spacer(),
                 const Padding(
                   padding: EdgeInsets.symmetric(horizontal: 32),
                   child: Divider(),
                 ),
                 const Spacer(),
-              ]
+              ],
             ],
           ],
         ),
@@ -212,76 +211,11 @@ class SecretPage extends StatelessWidget {
                   child: Image.asset('assets/images/Rows/Row4/Foto_2.jpg'),
                 ),
                 Expanded(
-                  child: Image.asset('assets/images/Rows/Row5/Foto_1.jpg'),
+                  child: Image.asset('assets/images/Rows/Row5/Foto_2.jpg'),
                 ),
               ],
             ),
           ),
-          // Row(
-          //   children: [
-          //     Expanded(
-          //       child: Image.asset('assets/images/Rows/Row1/Foto_1.jpg'),
-          //     ),
-          //     const Spacer(
-          //       flex: 1,
-          //     ),
-          //     Expanded(
-          //       child: Image.asset('assets/images/Rows/Row1/Foto_2.jpg'),
-          //     ),
-          //   ],
-          // ),
-          // const Spacer(),
-          // Row(
-          //   children: [
-          //     Expanded(
-          //       child: Image.asset('assets/images/Rows/Row2/Foto_1.jpg'),
-          //     ),
-          //     const Spacer(
-          //       flex: 1,
-          //     ),
-          //     Expanded(
-          //       child: Image.asset('assets/images/Rows/Row2/Foto_2.jpg'),
-          //     ),
-          //   ],
-          // ),
-          // const Spacer(),
-          // Row(
-          //   children: [
-          //     Expanded(
-          //       child: Image.asset('assets/images/Rows/Row3/Foto_1.jpg'),
-          //     ),
-          //     const Spacer(),
-          //     Expanded(
-          //       child: Image.asset('assets/images/Rows/Row3/Foto_2.jpg'),
-          //     ),
-          //   ],
-          // ),
-          // const Spacer(),
-          // Row(
-          //   children: [
-          //     Expanded(
-          //       child: Image.asset('assets/images/Rows/Row4/Foto_1.jpg'),
-          //     ),
-          //     const Spacer(
-          //       flex: 1,
-          //     ),
-          //     Expanded(
-          //       child: Image.asset('assets/images/Rows/Row4/Foto_2.jpg'),
-          //     ),
-          //   ],
-          // ),
-          // const Spacer(),
-          // Row(
-          //   children: [
-          //     Expanded(
-          //         child: Image.asset('assets/images/Rows/Row5/Foto_1.jpg')),
-          //     const Spacer(
-          //       flex: 1,
-          //     ),
-          //     Expanded(
-          //         child: Image.asset('assets/images/Rows/Row5/Foto_2.jpg')),
-          //   ],
-          // ),
         ],
       ),
     );
@@ -291,8 +225,8 @@ class SecretPage extends StatelessWidget {
 Future<void> _launchUrl(url) async {
   final uri = Uri.parse(url);
   try {
-    await launchUrl(uri);
+    await launchUrl(uri, mode: LaunchMode.externalApplication);
   } catch (err) {
-    throw 'Can\'t launch $uri fdsa';
+    throw 'Can\'t launch $uri';
   }
 }
