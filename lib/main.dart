@@ -102,7 +102,7 @@ class PickupLinesPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const pickupLines = {
+    final List<String> pickupLines = <String>[
       'If I could rearrange the alphabet, I\'d put \'U\' and \'I\' together',
       'Are you a parking ticket? Because you\'ve got FINE written all over you',
       'Well, here I am. What are your other two wishes?',
@@ -110,31 +110,23 @@ class PickupLinesPage extends StatelessWidget {
       'Did you just come out of the oven? Because you\'re hot',
       'What\'s in the menu??? Me \'n\' u',
       'It\'s a good thing I have my library card, because I am totally checking you out'
-    };
+    ];
 
     return Scaffold(
       appBar: AppBar(title: const Text('Pickup lines')),
-      body: Center(
-        child: Column(
-          children: [
-            const Spacer(),
-            for (var p in pickupLines) ...[
-              Expanded(
-                child: Text(
-                  textAlign: TextAlign.center,
-                  p,
-                ),
-              ),
-              const Spacer(),
-              if (p != pickupLines.last) ...[
-                const Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 32),
-                  child: Divider(),
-                ),
-                const Spacer(),
-              ],
-            ],
-          ],
+      body: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 32, horizontal: 8.0),
+        child: ListView.separated(
+          shrinkWrap: true,
+          padding: const EdgeInsets.all(8),
+          itemCount: pickupLines.length,
+          itemBuilder: (BuildContext context, int index) {
+            return Text(
+              textAlign: TextAlign.center,
+              pickupLines[index],
+            );
+          },
+          separatorBuilder: (BuildContext context, int index) => const Divider(height: 85),
         ),
       ),
     );
